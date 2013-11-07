@@ -5,13 +5,8 @@ exports.login = function(req, res){
     console.log("/login User"+JSON.stringify(req.user));
 
     tescoAuthentication(function(authenticatedUser){
-
     	addUserToSession(req.session,authenticatedUser)
-
-        res.render('index',{
-        	title:application.name,
-        	user: req.session.user
-        });
+    	res.redirect("/");
     });
 };
 

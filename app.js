@@ -5,8 +5,8 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var authenticate = require('./routes/authenticate');
+
 var http = require('http');
 var path = require('path');
 var hostProvider = require('./lib/providers/hostProvider')
@@ -34,9 +34,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/productSearch',routes.productSearch)
 app.get('/login',authenticate.login);
-app.get('/users', user.list);
+app.get('/productSearch',routes.productSearch)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
