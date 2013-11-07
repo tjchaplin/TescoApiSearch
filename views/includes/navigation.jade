@@ -1,0 +1,13 @@
+append navigation
+
+div.navbar.navbar-inverse.navbar-fixed-top
+    div.navbar-inner
+        div.container
+            a.brand(href="#")=title
+            div.nav-collapse.collapse
+                ul.nav.pull-right
+                    if(user)
+                        li.active(style="padding-top:10px;")=user.name
+                    else
+                        li.active
+                            button#login.btn(type="submit") Sign In

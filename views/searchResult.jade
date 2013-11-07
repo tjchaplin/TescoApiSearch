@@ -1,0 +1,14 @@
+if(productSearchResults)
+    div.well
+        ul.media-list(style="list-style-type:none;")
+            each product in productSearchResults.products
+                li.media(style="background-color:white;margin-bottom:10px;padding-top:10px;padding-bottom:10px;")
+                    a.pull-left(href="#")
+                        div.nailthumb-container
+                            img.media-object(src="#{product.image}")
+                    div.media-body
+                        div(style="margin-left:110px")
+                            h4.media-heading Product Name: #{product.name}
+                            p BaseProductId: #{product.baseProductId}
+                            p ProductId: #{product.productId}
+                            p GTIN: #{product.gtin}

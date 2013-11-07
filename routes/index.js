@@ -1,25 +1,17 @@
-/*
- * GET home page.
-*/
-
-var tescoProductDataFactory = require('./lib/factories/TescoProductDataFactory')
+var application = require('../package.json');
+var productSearchRequest = require('../lib/services/productSearch');
+var getProductSearchView = require('../lib/factories/TescoProductDataFactory');
 
 exports.index = function(req, res){
-	var tescoUser = {name:null};
-    console.log("/ User"+JSON.stringify(tescoUser));
-    response.render('index',{title:app.get('name'),user: {name: tescoUser.name}});
+    res.render('search',{title:application.name,user: req.session.user});
 };
 
-exports.search = function(req, res){
-	console.log("search User"+JSON.stringify(tescoUser));
+exports.productSearch = function(req, res){
+	var searchQuery = req.query["searchString"];
 
-	var search = request.query["searchString"];
-	if(search.indexOf(' ') >0)
-	    search ="+"+search.replace(/ /g,'+');
-
-	tescoProductSearchRequest(search,function(data){
+	productSearchRequest(req.session.user,searchQuery,function(data){
 	    var searchView = getProductSearchView(JSON.parse(data));
 	    console.log("SearchView:"+JSON.stringify(searchView));
-	    response.render('productSearch', {title:app.get('name'),user: request.user,productSearchResults:searchView});
+	    res.render('search', {title:application.name,user: req.session.user,productSearchResults:searchView});
 	});
 };
